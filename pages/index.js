@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import Header from "../components/Header";
-import ServiceCard from "../components/ServiceCard";
 import Socials from "../components/Socials";
 import WorkCard from "../components/WorkCard";
 import { useIsomorphicLayoutEffect } from "../utils";
@@ -10,6 +9,8 @@ import Head from "next/head";
 import Button from "../components/Button";
 import Link from "next/link";
 import Cursor from "../components/Cursor";
+import TecnologyCard from "../components/TecnologyCard";
+
 
 // Local Data
 import data from "../data/portfolio.json";
@@ -17,6 +18,7 @@ import data from "../data/portfolio.json";
 export default function Home() {
   // Ref
   const workRef = useRef();
+  const techRef = useRef();
   const aboutRef = useRef();
   const textOne = useRef();
   const textTwo = useRef();
@@ -39,7 +41,13 @@ export default function Home() {
       behavior: "smooth",
     });
   };
-
+  const handleTecnologiesScroll = () => {
+    window.scrollTo({
+      top: techRef.current.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
   useIsomorphicLayoutEffect(() => {
     stagger(
       [textOne.current, textTwo.current, textThree.current, textFour.current],
@@ -62,6 +70,7 @@ export default function Home() {
         <Header
           handleWorkScroll={handleWorkScroll}
           handleAboutScroll={handleAboutScroll}
+          handleTecnologiesScroll={handleTecnologiesScroll}
         />
         <div className="laptop:mt-20 mt-10">
           <div className="mt-5">
@@ -93,8 +102,9 @@ export default function Home() {
 
           <Socials className="mt-2 laptop:mt-5" />
         </div>
+
         <div className="mt-10 laptop:mt-30 p-2 laptop:p-0" ref={workRef}>
-          <h1 className="text-2xl text-bold">Work.</h1>
+          <h1 className="text-2xl text-bold text-center">Proyectos y trabajos</h1>
 
           <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 gap-4">
             {data.projects.map((project) => (
@@ -109,32 +119,23 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-10 laptop:mt-30 p-2 laptop:p-0">
-          <h1 className="tablet:m-10 text-2xl text-bold">Services.</h1>
-          <div className="mt-5 tablet:m-10 grid grid-cols-1 laptop:grid-cols-2 gap-6">
-            {data.services.map((service, index) => (
-              <ServiceCard
-                key={index}
-                name={service.title}
-                description={service.description}
-              />
-            ))}
+
+        <div className="mt-10 laptop:mt-40 p-2 laptop:p-0 " ref={techRef}>
+          <h1 className="tablet:m-10 text-2xl text-bold text-center">Tecnologias</h1>
+          <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 gap-4">
+            <TecnologyCard title="Backend"></TecnologyCard>
+            <TecnologyCard title="FrontEnd"></TecnologyCard>
           </div>
         </div>
-        {/* This button should not go into production */}
-        {process.env.NODE_ENV === "development" && (
-          <div className="fixed bottom-5 right-5">
-            <Link href="/edit">
-              <Button type="primary">Edit Data</Button>
-            </Link>
+        <div className="mt-10 laptop:mt-40 p-2 laptop:p-0 flex justify-center" ref={aboutRef}>
+          <div className="w-full laptop:w-3/4">
+            <h1 className="tablet:m-10 text-2xl font-bold text-center">About</h1>
+            <p className="tablet:m-10 mt-2 text-xl laptop:text-3xl text-pretty">
+              {data.aboutpara}
+            </p>
           </div>
-        )}
-        <div className="mt-10 laptop:mt-40 p-2 laptop:p-0" ref={aboutRef}>
-          <h1 className="tablet:m-10 text-2xl text-bold">About.</h1>
-          <p className="tablet:m-10 mt-2 text-xl laptop:text-3xl w-full laptop:w-3/5">
-            {data.aboutpara}
-          </p>
         </div>
+
         <Footer />
       </div>
     </div>
