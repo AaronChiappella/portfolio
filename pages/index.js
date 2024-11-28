@@ -104,7 +104,7 @@ export default function Home() {
         </div>
 
         <div className="mt-10 laptop:mt-30 p-2 laptop:p-0" ref={workRef}>
-          <h1 className="text-2xl text-bold text-center">Proyectos y trabajos</h1>
+          <h1 className="text-2xl font-doto text-bold text-center">Proyectos y trabajos</h1>
 
           <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 gap-4">
             {data.projects.map((project) => (
@@ -120,14 +120,42 @@ export default function Home() {
         </div>
 
 
-        <div className="mt-10 laptop:mt-40 p-2 laptop:p-0 " ref={techRef}>
+        <div className="mt-10 laptop:mt-20 p-2 laptop:p-0 " ref={techRef}>
           <h1 className="tablet:m-10 text-2xl text-bold text-center">Tecnologias</h1>
           <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 gap-4">
-            <TecnologyCard title="Backend"></TecnologyCard>
-            <TecnologyCard title="FrontEnd"></TecnologyCard>
+          <TecnologyCard
+  title="Backend"
+  technologies={[
+    "https://www.svgrepo.com/show/521273/c-sharp-16.svg",
+    "https://www.svgrepo.com/show/376369/dotnet.svg",
+    "https://www.svgrepo.com/show/452075/node-js.svg",
+    "https://www.svgrepo.com/show/373965/pgsql.svg",
+    "https://www.svgrepo.com/show/508811/dbs-sqlserver.svg",
+    "https://www.svgrepo.com/show/374016/python.svg",
+    "https://www.svgrepo.com/show/373845/mongo.svg",
+    "https://www.svgrepo.com/show/374005/prolog.svg",
+    
+  ]}
+/>
+
+            <TecnologyCard 
+            title="FrontEnd"
+            technologies={[
+              "https://www.svgrepo.com/show/452228/html-5.svg",
+              "https://www.svgrepo.com/show/452185/css-3.svg",
+              "https://www.svgrepo.com/show/373705/js-official.svg",
+              "https://www.svgrepo.com/show/452092/react.svg",
+              "https://www.svgrepo.com/show/378440/nextjs-fill.svg",
+              "https://www.svgrepo.com/show/353855/handlebars.svg",
+              "https://www.svgrepo.com/show/374118/tailwind.svg"
+
+            ]}>
+
+
+            </TecnologyCard>
           </div>
         </div>
-        <div className="mt-10 laptop:mt-40 p-2 laptop:p-0 flex justify-center" ref={aboutRef}>
+        <div className="mt-4 laptop:mt-20 p-2 laptop:p-0 flex justify-center" ref={aboutRef}>
           <div className="w-full laptop:w-3/4">
             <h1 className="tablet:m-10 text-2xl font-bold text-center">About</h1>
             <p className="tablet:m-10 mt-2 text-xl laptop:text-3xl text-pretty">
