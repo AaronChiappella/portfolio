@@ -8,10 +8,10 @@ const Socials = ({ className }) => {
     <div className={`${className} flex flex-wrap mob:flex-nowrap link`}>
 
 
-<a href="https://drive.google.com/uc?export=download&id=1tKLlLk5jn2uO1EkJLlFVhkGATMJdcSAM" download class="flex items-center rounded-full border border-white bg-transparent px-4 py-2 text-white hover:bg-white hover:text-black">
+<a href="https://drive.google.com/uc?export=download&id=1tKLlLk5jn2uO1EkJLlFVhkGATMJdcSAM" download className="flex items-center rounded-full border border-white bg-transparent px-4 py-2 text-white hover:bg-white hover:text-black">
 Descargar CV
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-5-4l-3 3m0 0l-3-3m3 3V4" />
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" className="w-5 h-5 mr-2">
+    <path   d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-5-4l-3 3m0 0l-3-3m3 3V4" />
   </svg>
  
 </a>
