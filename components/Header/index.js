@@ -6,15 +6,32 @@ import Button from "../Button";
 // Local Data
 import data from "../../data/portfolio.json";
 
-const Header = ({ handleWorkScroll, handleAboutScroll,handleTecnologiesScroll, isBlog }) => {
+const Header = ({ handleWorkScroll, handleAboutScroll, handleTecnologiesScroll, handleServicesScroll, isBlog }) => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  let lastScrollY = 0; // Variable para almacenar la última posición de desplazamiento
 
   const { name, showBlog, showResume } = data;
 
   useEffect(() => {
     setMounted(true);
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        // Si el desplazamiento va hacia abajo, ocultar la navbar
+        setShowNavbar(false);
+      } else {
+        // Si el desplazamiento va hacia arriba, mostrar la navbar
+        setShowNavbar(true);
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
@@ -29,38 +46,6 @@ const Header = ({ handleWorkScroll, handleAboutScroll,handleTecnologiesScroll, i
               >
                 {name}
               </h1>
-
-              <div className="flex items-center">
-                {data.darkMode && (
-                  <Button
-                    onClick={() =>
-                      setTheme(theme === "dark" ? "light" : "dark")
-                    }
-                  >
-                    <img
-                      className="h-6"
-                      src={`/images/${
-                        theme === "dark" ? "moon.svg" : "sun.svg"
-                      }`}
-                    ></img>
-                  </Button>
-                )}
-
-                <Popover.Button>
-                  <img
-                    className="h-5"
-                    src={`/images/${
-                      !open
-                        ? theme === "dark"
-                          ? "menu-white.svg"
-                          : "menu.svg"
-                        : theme === "light"
-                        ? "cancel.svg"
-                        : "cancel-white.svg"
-                    }`}
-                  ></img>
-                </Popover.Button>
-              </div>
             </div>
             <Popover.Panel
               className={`absolute right-0 z-10 w-11/12 p-4 ${
@@ -84,11 +69,10 @@ const Header = ({ handleWorkScroll, handleAboutScroll,handleTecnologiesScroll, i
                       Resume
                     </Button>
                   )}
-
                   <Button
-                    onClick={() => window.open("mailto:hello@chetanverma.com")}
+                    onClick={() => window.open("mailto:aaronchiappella@gmail.com")}
                   >
-                    Contact
+                    Enviar mail
                   </Button>
                 </div>
               ) : (
@@ -107,11 +91,10 @@ const Header = ({ handleWorkScroll, handleAboutScroll,handleTecnologiesScroll, i
                       Resume
                     </Button>
                   )}
-
                   <Button
-                    onClick={() => window.open("mailto:hello@chetanverma.com")}
+                    onClick={() => window.open("mailto:aaronchiappella@gmail.com")}
                   >
-                    Contact
+                    Enviar mail
                   </Button>
                 </div>
               )}
@@ -120,9 +103,11 @@ const Header = ({ handleWorkScroll, handleAboutScroll,handleTecnologiesScroll, i
         )}
       </Popover>
       <div
-        className={`mt-10 hidden flex-row items-center justify-between sticky ${
-          theme === "light" && "bg-white"
-        } dark:text-white top-0 z-10 tablet:flex`}
+        className={`mt-5 hidden flex-row items-center justify-between sticky top-0 z-10 tablet:flex ${
+          showNavbar ? "" : "hidden"
+        } ${
+          theme === "light" ? "bg-white " : "bg"
+        }  border border-transparent`} // Aplica la clase "hidden" cuando showNavbar es falso
       >
         <h1
           onClick={() => router.push("/")}
@@ -132,9 +117,10 @@ const Header = ({ handleWorkScroll, handleAboutScroll,handleTecnologiesScroll, i
         </h1>
         {!isBlog ? (
           <div className="flex">
-            <Button onClick={handleWorkScroll}>Work</Button>
-            <Button onClick={handleTecnologiesScroll}>Tecnologies</Button>
-            <Button onClick={handleAboutScroll}>About</Button>
+            <Button onClick={handleWorkScroll}>Proyectos</Button>
+            <Button onClick={handleTecnologiesScroll}>Tecnologias</Button>
+            <Button onClick={handleAboutScroll}>Sobre Mi</Button>
+            <Button onClick={handleServicesScroll}>Servicios</Button>
             {showBlog && (
               <Button onClick={() => router.push("/blog")}>Blog</Button>
             )}
@@ -146,20 +132,9 @@ const Header = ({ handleWorkScroll, handleAboutScroll,handleTecnologiesScroll, i
                 Resume
               </Button>
             )}
-
-            <Button onClick={() => window.open("mailto:hello@chetanverma.com")}>
-              Contact
+            <Button onClick={() => window.open("mailto:aaronchiappella@gmail.com")}>
+              Enviar mail
             </Button>
-            {mounted && theme && data.darkMode && (
-              <Button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              >
-                <img
-                  className="h-6"
-                  src={`/images/${theme === "dark" ? "moon.svg" : "sun.svg"}`}
-                ></img>
-              </Button>
-            )}
           </div>
         ) : (
           <div className="flex">
@@ -175,21 +150,9 @@ const Header = ({ handleWorkScroll, handleAboutScroll,handleTecnologiesScroll, i
                 Resume
               </Button>
             )}
-
-            <Button onClick={() => window.open("mailto:hello@chetanverma.com")}>
+            <Button onClick={() => window.open("mailto:aaronchiappella@gmail.com")}>
               Contact
             </Button>
-
-            {mounted && theme && data.darkMode && (
-              <Button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              >
-                <img
-                  className="h-6"
-                  src={`/images/${theme === "dark" ? "moon.svg" : "sun.svg"}`}
-                ></img>
-              </Button>
-            )}
           </div>
         )}
       </div>

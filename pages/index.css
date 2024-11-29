@@ -1,0 +1,19 @@
+@keyframes borderMove {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dasharray: 200, 200;
+      stroke-dashoffset: -200;
+    }
+  }
+  
+  .border-animation {
+    animation: borderMove 2s linear infinite;
+    stroke: #34d399; /* Green color */
+    stroke-width: 3;
+    stroke-dasharray: 200, 200;
+    stroke-dashoffset: 0;
+  }
+  

@@ -3,7 +3,7 @@ import React from "react";
 const TecnologyCard = ({ title, technologies = [] }) => {
   return (
     <div
-      className="overflow-hidden rounded-lg p-2 laptop:p-4 first:ml-0 link bg-gray-800/40 backdrop-blur-md"
+      className="overflow-hidden rounded-lg laptop:p-4 first:ml-0 link bg-gray-800/40 backdrop-blur-md"
     >
       <h1 className="text-center"> {title} </h1>
       <div
